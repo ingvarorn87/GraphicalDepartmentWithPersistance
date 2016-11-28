@@ -112,6 +112,5 @@ public class DepartmentPersistanceRandomTextFile extends AbstractDepartmentPersi
                 raf.writeBytes(String.format("%-" + NAME_SIZE + "s", dept.getName()).substring(0, NAME_SIZE));
             }
         }
-    
     }
 }

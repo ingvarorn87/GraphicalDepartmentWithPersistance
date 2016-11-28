@@ -51,7 +51,4 @@ public class Department implements Serializable
     {
         return String.format("%4d %-50s", id, name);
     }
-    
-    
-    
 }
