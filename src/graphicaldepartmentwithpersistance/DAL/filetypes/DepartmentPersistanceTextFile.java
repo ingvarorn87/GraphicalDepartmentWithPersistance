@@ -14,9 +14,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  *
  * @author jeppjleemoritzled
@@ -38,10 +35,6 @@ public class DepartmentPersistanceTextFile extends AbstractDepartmentPersistance
         {
             bw.append(d.getId() + "," + d.getName());
             bw.newLine();
-        }
-        catch (IOException ex)
-        {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -73,11 +66,6 @@ public class DepartmentPersistanceTextFile extends AbstractDepartmentPersistance
         {
             bw.write(newFileString);
         }
-        catch (IOException ex)
-        {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-        }
-
     }
 
     @Override
@@ -98,10 +86,6 @@ public class DepartmentPersistanceTextFile extends AbstractDepartmentPersistance
                     return new Department(id, fields[1].trim());
                 }
             }
-        }
-        catch (IOException ioe)
-        {
-            throw ioe;
         }
         return null;
     }
@@ -127,10 +111,6 @@ public class DepartmentPersistanceTextFile extends AbstractDepartmentPersistance
                         ));
             }
         }
-        catch (IOException ioe)
-        {
-            System.out.println(ioe);
-        }
         return depList;
     }
 
@@ -149,10 +129,5 @@ public class DepartmentPersistanceTextFile extends AbstractDepartmentPersistance
                 bw.newLine();
             }
         }
-        catch (IOException ex)
-        {
-            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-        }
     }
-
 }

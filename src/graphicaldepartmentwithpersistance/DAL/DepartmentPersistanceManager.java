@@ -5,6 +5,7 @@
  */
 package graphicaldepartmentwithpersistance.DAL;
 
+import graphicaldepartmentwithpersistance.util.FileType;
 import graphicaldepartmentwithpersistance.DAL.filetypes.*;
 import graphicaldepartmentwithpersistance.BE.*;
 import java.io.IOException;
@@ -18,7 +19,6 @@ public final class DepartmentPersistanceManager
 {
     private AbstractDepartmentPersistanceFile fileHandler;
     private String fileName;
-    
     
     public void setFileType(FileType type)
     {

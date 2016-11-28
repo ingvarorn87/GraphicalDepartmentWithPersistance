@@ -6,12 +6,11 @@
 package graphicaldepartmentwithpersistance.BLL;
 
 import graphicaldepartmentwithpersistance.BE.Department;
-import graphicaldepartmentwithpersistance.BE.FileType;
+import graphicaldepartmentwithpersistance.util.FileType;
 import graphicaldepartmentwithpersistance.DAL.DepartmentPersistanceManager;
+import graphicaldepartmentwithpersistance.util.DepartmentException;
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -19,6 +18,7 @@ import java.util.logging.Logger;
  */
 public class DepartmentManager
 {
+
     private static final String FILE_NAME = "Departments";
     private final DepartmentPersistanceManager dpm;
 
@@ -26,80 +26,82 @@ public class DepartmentManager
     {
         dpm = new DepartmentPersistanceManager(FILE_NAME);
     }
-    
+
     public void setFileType(FileType type)
     {
         dpm.setFileType(type);
     }
-    public void clearAll()
+
+    public void clearAll() throws DepartmentException
     {
         try
         {
             dpm.clearAll();
         }
-        catch (IOException ex)
+        catch (IOException ioex)
         {
-            Logger.getLogger(DepartmentManager.class.getName()).log(Level.SEVERE, null, ex);
+            throw new DepartmentException("Cannot clear all departments", ioex);
         }
     }
-    public void addDepartment(Department d)
+
+    public void addDepartment(Department d) throws DepartmentException
     {
         try
         {
             dpm.addDepartment(d);
         }
-        catch (IOException ex)
+        catch (IOException ioex)
         {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
-        } 
+            throw new DepartmentException("Cannot add department", ioex);
+        }
     }
-    public void addAll(List<Department> depts)
+
+    public void addAll(List<Department> depts) throws DepartmentException
     {
         try
         {
             dpm.addAll(depts);
         }
-        catch (IOException ex)
+        catch (IOException ioex)
         {
-            Logger.getLogger(DepartmentManager.class.getName()).log(Level.SEVERE, null, ex);
+            throw new DepartmentException("Cannot add all departments", ioex);
         }
     }
 
-    public List<Department> getAll()
+    public List<Department> getAll() throws DepartmentException
     {
         try
         {
             return dpm.getAll();
         }
-        catch (IOException ex)
+        catch (IOException ioex)
         {
-            Logger.getLogger(DepartmentManager.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-        return null;
+            throw new DepartmentException("Cannot get all departments", ioex);
+        }
     }
 
-    public Department getById(int departmentId)
+    public Department getById(int departmentId) throws DepartmentException
     {
         try
         {
             return dpm.getById(departmentId);
-        } catch (IOException ex)
+        }
+        catch (IOException ioex)
         {
-            throw new RuntimeException("Unable to read department");
+            throw new DepartmentException("Cannot department from id: " + departmentId, ioex);
         }
     }
 
-    public void delete(Department d)
+    public void delete(Department d) throws DepartmentException
     {
-
         try
         {
             dpm.deleteById(d.getId());
-        } catch (IOException ex)
-        {
-            throw new RuntimeException("Unable to delete department");
         }
-
+        catch (IOException ioex)
+        {
+            throw new DepartmentException(
+                    "Cannot department"+ d.getName() + " with id: " + d.getId(), ioex);
+        }
     }
-
 }

@@ -13,8 +13,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -74,9 +72,8 @@ public class DepartmentPersistanceSerializedFile extends AbstractDepartmentPersi
         }
         catch (ClassNotFoundException ex)
         {
-            Logger.getLogger(DepartmentPersistanceSerializedFile.class.getName()).log(Level.SEVERE, null, ex);
+            throw new IOException(ex);
         }
-        return null;
     }
     
     @Override
