@@ -6,6 +6,10 @@
 package graphicaldepartmentwithpersistance.BE;
 
 import java.io.Serializable;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 /**
  *
@@ -13,38 +17,53 @@ import java.io.Serializable;
  */
 public class Department implements Serializable
 {
-    private final int id;
-    private String name;
+
+    private final IntegerProperty id; 
+    private final StringProperty name; 
+
+    public Department()
+    {
+        id = new SimpleIntegerProperty();
+        name = new SimpleStringProperty();
+    }
 
     public Department(int id, String name)
     {
-        this.id = id;
-        this.name = name;
+        this();
+        this.id.set(id);
+        this.name.set(name);
     }
-
-    /**
-     * @return the id
-     */
-    public int getId()
-    {
-        return id;
-    }
-
-    /**
-     * @return the name
-     */
+    
     public String getName()
+    {
+        return name.get();
+    }
+
+    public void setName(String value)
+    {
+        name.set(value);
+    }
+
+    public StringProperty nameProperty()
     {
         return name;
     }
-
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name)
+    
+    public int getId()
     {
-        this.name = name;
+        return id.get();
     }
+
+    public void setId(int value)
+    {
+        id.set(value);
+    }
+
+    public IntegerProperty idProperty()
+    {
+        return id;
+    }
+    
 
     @Override
     public String toString()
